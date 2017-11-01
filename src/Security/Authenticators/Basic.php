@@ -6,7 +6,7 @@ namespace Holabs\Security\Authenticators;
 use Holabs\Security\Authenticator;
 use Holabs\UI\Form;
 use Holabs\UI\FormFactory;
-use Kdyby\Translation\ITranslator;
+use Nette\Localization\ITranslator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IUserStorage;
 use Nette\Security\User;
@@ -36,7 +36,7 @@ class Basic extends Authenticator {
 	 * @param FormFactory $formFactory
 	 * @param User        $user
 	 */
-	public function __construct(ITranslator $translator, FormFactory $formFactory, User $user) {
+	public function __construct(FormFactory $formFactory, User $user, ITranslator $translator = NULL) {
 		parent::__construct($translator);
 		$this->setTemplateFile(self::$DEFAULT_TEMPLATE);
 		$this->formFactory = $formFactory;
