@@ -53,7 +53,7 @@ class Basic extends Authenticator {
 	 * @return Form
 	 */
 	protected function createComponentForm() {
-		$form = $this->formFactory->create();
+		$form = $this->formFactory->create($this->getTranslator());
 		$form->addText('username', 'basic_authenticator.form.username.label')
 			->setAttribute('placeholder', 'basic_authenticator.form.username.placeholder')
 			->setRequired('basic_authenticator.form.username.required');
