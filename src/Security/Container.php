@@ -12,10 +12,18 @@ use Nette\Utils\ArrayHash;
  * @author       Tomáš Holan <mail@tomasholan.eu>
  * @package      holabs/security
  * @copyright    Copyright © 2016, Tomáš Holan [www.tomasholan.eu]
+ * @method onSuccess(Container $sender, User $user) Occures when Authorization complete.
+ * @method onFail(Container $sender) Occures when authorization fails
  */
 class Container {
 
 	use SmartObject;
+	
+	/** @var \Closure[]|callable[]|array */
+	public $onSuccess = [];
+
+	/** @var \Closure[]|callable[]|array */
+	public $onFail = [];
 
 	/** @var Authenticator[]|ArrayHash */
 	private $authenticators;
@@ -46,6 +54,12 @@ class Container {
 	 */
 	public function addAuthenticator(Authenticator $authenticator, $name) {
 		$this->authenticators->offsetSet($name, $authenticator);
+		$authenticator->onSuccess[] = function($sender, $user) {
+			$this->onSuccess($this, $user);
+		};
+		$authenticator->onFail[] = function() {
+			$this->onFail($this);
+		};
 
 		return $this;
 	}
