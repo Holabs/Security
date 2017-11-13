@@ -13,7 +13,7 @@ use Nette\Utils\ArrayHash;
  * @package      holabs/security
  * @copyright    Copyright © 2016, Tomáš Holan [www.tomasholan.eu]
  * @method onSuccess(Container $sender, User $user) Occures when Authorization complete.
- * @method onFail(Container $sender) Occures when authorization fails
+ * @method onFail(Container $sender, array $data = NULL) Occures when authorization fails
  */
 class Container {
 
@@ -57,8 +57,8 @@ class Container {
 		$authenticator->onSuccess[] = function($sender, $user) {
 			$this->onSuccess($this, $user);
 		};
-		$authenticator->onFail[] = function() {
-			$this->onFail($this);
+		$authenticator->onFail[] = function($sender, $data = NULL) {
+			$this->onFail($this, $data);
 		};
 
 		return $this;
