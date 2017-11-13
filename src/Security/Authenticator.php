@@ -13,7 +13,7 @@ use Nette\Security\User;
  * @copyright    Copyright © 2016, Tomáš Holan [www.tomasholan.eu]
  *
  * @method onSuccess(Authenticator $sender, User $user) Occures when Authorization complete.
- * @method onFail(Authenticator $sender) Occures when authorization fails
+ * @method onFail(Authenticator $sender, array $data = NULL) Occures when authorization fails
  */
 abstract class Authenticator extends BaseControl {
 
