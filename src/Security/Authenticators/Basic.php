@@ -83,7 +83,7 @@ class Basic extends Authenticator {
 			$user->setExpiration(0, IUserStorage::CLEAR_IDENTITY);
 		} catch (AuthenticationException $e) {
 			$this->flashMessage('basic_authenticator.login.fail', 'danger');
-			$this->onFail($this);
+			$this->onFail($this, $values);
 
 			return;
 		}
