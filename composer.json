@@ -14,5 +14,8 @@
         "holabs/ui": "~1.0",
         "nette/di": "~2.4",
         "nette/utils": "~2.4"
-    }
+    },
+	"autoload": {
+		"classmap": ["src"]
+	}
 }
