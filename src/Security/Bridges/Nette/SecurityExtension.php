@@ -6,6 +6,7 @@ namespace Holabs\Security\Bridges\Nette;
 use Holabs\Security\Container;
 use Holabs\Security\IUserStorage;
 use Holabs\Security\User;
+use Holabs\Security\UserStorage;
 use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\Statement;
 
@@ -44,7 +45,8 @@ class SecurityExtension extends ExtensionsExtension {
 			->setFactory(Container::class);
 
 		$builder->getDefinition('security.userStorage')
-			->setFactory(IUserStorage::class);
+			->setClass(IUserStorage::class)
+			->setFactory(UserStorage::class);
 
 		$builder->getDefinition('security.user')
 			->setFactory(User::class);
