@@ -4,6 +4,8 @@
 namespace Holabs\Security\Bridges\Nette;
 
 use Holabs\Security\Container;
+use Holabs\Security\IUserStorage;
+use Holabs\Security\User;
 use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\Statement;
 
@@ -17,14 +19,35 @@ class SecurityExtension extends ExtensionsExtension {
 
 	public $defaults = [
 		'authenticators' => [],
+		'verificator' => NULL,
 	];
+
+	/** @var bool */
+	private $debugMode;
+
+
+	public function __construct($debugMode = false)
+	{
+		$this->debugMode = $debugMode;
+	}
 
 	public function loadConfiguration() {
 		$this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
+		if ($this->config['verificator'] !== NULL && class_exists($this->config['verificator'])) {
+			$builder->addDefinition($this->prefix('verificator'))
+				->setFactory($this->config['verificator']);
+		}
+
 		$builder->addDefinition($this->prefix('container'))
-			->setClass(Container::class);
+			->setFactory(Container::class);
+
+		$builder->getDefinition('security.userStorage')
+			->setFactory(IUserStorage::class);
+
+		$builder->getDefinition('security.user')
+			->setFactory(User::class);
 
 		// Add authenticators
 		$this->setup();
