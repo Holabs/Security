@@ -67,7 +67,7 @@ class UserStorage extends NetteUserStorage implements IUserStorage {
 	protected function getSessionSection($need) {
 		$session = parent::getSessionSection($need);
 
-		if (!$session->authenticated || !$session->verified) {
+		if ($session !== NULL && (!$session->authenticated || !$session->verified)) {
 			unset($session->expireVerifyTime, $session->expireVerifyDelta, $session->verifyTime);
 		}
 
