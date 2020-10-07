@@ -7,7 +7,7 @@ use Holabs\Security\Container;
 use Holabs\Security\IUserStorage;
 use Holabs\Security\User;
 use Holabs\Security\UserStorage;
-use Nette\DI\Extensions\ExtensionsExtension;
+use Nette\DI\CompilerExtension;
 use Nette\DI\Statement;
 
 
@@ -16,7 +16,7 @@ use Nette\DI\Statement;
  * @package      holabs/security
  * @copyright    Copyright © 2016, Tomáš Holan [www.tomasholan.eu]
  */
-class SecurityExtension extends ExtensionsExtension {
+class SecurityExtension extends CompilerExtension {
 
 	public $defaults = [
 		'authenticators' => [],
