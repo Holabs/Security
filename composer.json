@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "holabs/ui": "~1.0",
+        "holabs/ui": "dev-master",
         "nette/di": "^3.0"
     },
 	"autoload": {
