@@ -64,7 +64,7 @@ class UserStorage extends NetteUserStorage implements IUserStorage {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getSessionSection($need) {
+	protected function getSessionSection(bool $need): ?SessionSection {
 		$session = parent::getSessionSection($need);
 
 		if ($session !== NULL && (!$session->authenticated || !$session->verified)) {
