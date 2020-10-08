@@ -4,6 +4,7 @@
 namespace Holabs\Security;
 
 use Nette\Utils\DateTime;
+use Nette\Http\SessionSection;
 use Nette\Http\UserStorage as NetteUserStorage;
 
 
